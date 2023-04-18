@@ -1,0 +1,17 @@
+.popup__container_big {
+  margin: 0 auto;
+  max-width: 75vw;
+  height: 75vh;
+  background-color: #fff;
+  color: #000;
+  position: relative;
+}
+
+@media screen and (max-width: 620px) {
+  .popup__container_big {
+    margin-top: 130px;
+    margin-bottom: 130px;
+    max-width: 240px;
+    height: 299px;
+  }
+}

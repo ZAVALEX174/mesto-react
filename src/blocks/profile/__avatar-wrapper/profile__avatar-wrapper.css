@@ -1,0 +1,42 @@
+.profile__avatar-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 120px;
+  box-sizing: border-box;
+  max-width: 100%;
+  position: relative;
+  z-index: 0;
+  cursor: pointer;
+}
+
+.profile__avatar-wrapper:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+}
+
+.profile__avatar-wrapper:hover:before {
+  opacity: 0.8;
+}
+
+.profile__avatar-wrapper:hover .profile__avatar-pen {
+  opacity: 1;
+}
+
+@media screen and (max-width: 620px) {
+  .profile__avatar-wrapper {
+    margin: 0 auto;
+  }
+}

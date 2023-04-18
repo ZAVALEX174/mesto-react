@@ -1,0 +1,11 @@
+.popup__text_image {
+  margin-right: 126px;
+  padding-right: 110px;
+}
+
+@media screen and (max-width: 620px) {
+  .popup__text_image {
+    margin-right: 32px;
+    padding-right: 109px;
+  }
+}

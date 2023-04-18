@@ -1,0 +1,23 @@
+.profile__btn {
+  margin: 0;
+  padding: 0 73px 0 73px;
+  background: url(../../../images/Vector-plus.svg) center no-repeat;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+  max-width: 150px;
+  min-height: 50px;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.profile__btn:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 620px) {
+  .profile__btn {
+    padding: 0 132px 0 132px;
+    max-width: 282px;
+  }
+}
