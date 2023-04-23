@@ -1,86 +1,52 @@
-// import React from "react";
-
-// function PopupWithForm(props) {
-//   const popupOpened = props.isOpen ? "popup_opened" : "";
-
-//   function close(evt) {
-//     if (evt.target.classList.contains("popup_opened")) {
-//       props.onClose();
-//     }
-//     if (evt.target.classList.contains("popup__close")) {
-//       props.onClose();
-//     }
-//   }
-
-//   React.useEffect(() => {
-//     function handleEscClose(event) {
-//       if (event.keyCode === 27) {
-//переписать
-//     props.onClose();
-//   }
-// }
-//монтирование (рождение)
-//   document.addEventListener("keydown", handleEscClose);
-
-//   return () => {
-//     //размонтирование (умирание)
-//     document.removeEventListener("keydown", handleEscClose);
-//   };
-// }, []);
-
-// return (
-//   <>
-//     <div
-//         className={`popup popup_${props.popup} ${popupOpened}`}
-//         onMouseDown={close}
-//       >
-//         <div className="popup__container">
-//           <button className="popup__close" type="button">
-//             {" "}
-//           </button>
-//           <h2 className="popup__title">{props.title}</h2>
-//           <form
-//             className="popup__form"
-//             name={props.name}
-//             noValidate
-//             onSubmit={props.onSubmit}
-//           >
-//             {props.children}
-//           </form>
-//         </div>
-//       </div>
-//     </>
-//   );
-// }
-// export default PopupWithForm;
-
-//=====================================================================================
-
 import React from "react";
+import { useEffect } from "react";
 
-function PopupWithForm(props) {
+function PopupWithForm({
+  isOpen,
+  onClose,
+  onCloseEsc,
+  onCloseOverlay,
+  onSubmit,
+  isLoading,
+  name,
+  title,
+  submitButton,
+  submitBtnLoading,
+  children,
+}) {
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener("keydown", onCloseEsc);
+    } else {
+      document.removeEventListener("keydown", onCloseEsc);
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener("mousedown", onCloseOverlay);
+    } else {
+      document.removeEventListener("mousedown", onCloseOverlay);
+    }
+  }, [isOpen]);
+
   return (
-    <>
-      <div
-        className={`popup popup_${props.popup} ${popupOpened}`}
-        onMouseDown={close}
-      >
-        <div className="popup__container">
-          <button className="popup__close" type="button">
-            {" "}
-          </button>
-          <h2 className="popup__title">{props.title}</h2>
-          <form
-            className="popup__form"
-            name={props.name}
-            noValidate
-            onSubmit={props.onSubmit}
-          >
-            {props.children}
-          </form>
-        </div>
+    <section className={`popup ${name} ${isOpen && `popup_opened`}`}>
+      <div className="popup__container">
+        <h2 className="popup__text">{title}</h2>
+        <form name={"form"} className="popup__form" onSubmit={onSubmit}>
+          {children}
+          {/* <button className={`popup__save `} type="submit">
+            {isLoading ? submitBtnLoading : submitButton}
+          </button> */}
+        </form>
+        <button
+          onClick={onClose}
+          className="popup__close"
+          type="button"
+        ></button>
       </div>
-    </>
+    </section>
   );
 }
 

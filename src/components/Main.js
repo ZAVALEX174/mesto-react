@@ -50,17 +50,22 @@
 
 import React from "react";
 import pen from "../images/pen.svg";
+//import Card from "./Card";
 
-function Main(props) {
+function Main({
+  onEditProfile,
+  onAddPlace,
+  onEditAvatar,
+  onCardClick,
+  elements,
+  onConfirmCardDelete
+}) {
   return (
     <>
       <main>
         <section className="section profile container">
           <div className="profile__user">
-            <div
-              className="profile__avatar-wrapper"
-              onClick={props.onEditAvatar}
-            >
+            <div className="profile__avatar-wrapper" onClick={onEditAvatar}>
               <img src="#" alt="Аватарка" className="profile__image" />{" "}
               <img className="profile__avatar-pen" src={pen} alt="Карандаш" />
             </div>
@@ -69,23 +74,30 @@ function Main(props) {
               <button
                 type="button"
                 className="profile__btn-editing"
-                onClick={props.onEditProfile}
+                onClick={onEditProfile}
               />
               <p className="profile__subtitle" />
             </div>
           </div>
-          <button
-            type="button"
-            className="profile__btn"
-            onClick={props.onAddPlace}
-          />
+          <button type="button" className="profile__btn" onClick={onAddPlace} />
         </section>
         <section className="section elements container">
-          <ul className="element" />
+          <ul className="element">
+            {/* {elements.map((card) => (
+              <Card
+                card={card}
+                key={card._id}
+                name={card.name}
+                link={card.link}                
+                onCardClick={onCardClick}                
+                onConfirmCardDelete={onConfirmCardDelete}
+              />
+            ))} */}
+          </ul>
         </section>
       </main>
 
-      <div className="popup profile-popup">
+      {/* <div className="popup profile-popup">
         <div className="popup__container">
           <h2 className="popup__text">Редактировать профиль</h2>
           <form
@@ -127,10 +139,10 @@ function Main(props) {
               Сохранить
             </button>
           </form>
-          <button type="button" className="popup__close" />
+          <button type="button" className="popup__close " />
         </div>
-      </div>
-      <div className="popup popup_image">
+      </div> */}
+      {/* <div className="popup popup_image">
         <div className="popup__container popup__container-image">
           <h2 className="popup__text">Новое место</h2>
           <form
@@ -175,9 +187,9 @@ function Main(props) {
           </form>
           <button type="button" className="popup__close popup__close_image" />
         </div>
-      </div>
+      </div> */}
       {/*аватар*/}
-      <div className="popup popup_avatar-form">
+      {/* <div className="popup popup_avatar-form">
         <div className="popup__container">
           <h2 className="popup__text">Обновить аватар</h2>
           <form className="popup__form" name="edit-form-avatar" noValidate="">
@@ -203,7 +215,7 @@ function Main(props) {
             type="button"
           />
         </div>
-      </div>
+      </div> */}
     </>
   );
 }
