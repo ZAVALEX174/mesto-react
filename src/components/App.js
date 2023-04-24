@@ -386,7 +386,7 @@ function App() {
   }
   //пока оставить
   function closePopupWithClickOnOwerlay(evt) {
-    if (evt.target.classList.add("popup_opened")) {
+    if (evt.target.classList.contains("popup_opened")) {
       closeAllPopups();
     }
   }
