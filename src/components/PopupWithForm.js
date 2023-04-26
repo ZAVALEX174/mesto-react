@@ -36,9 +36,9 @@ function PopupWithForm({
         <h2 className="popup__text">{title}</h2>
         <form name={"form"} className="popup__form" onSubmit={onSubmit}>
           {children}
-          {/* <button className={`popup__save `} type="submit">
+          <button className={`popup__button`} type="submit">
             {isLoading ? submitBtnLoading : submitButton}
-          </button> */}
+          </button>
         </form>
         <button
           onClick={onClose}
