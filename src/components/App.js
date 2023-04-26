@@ -59,7 +59,7 @@ function App() {
           onCardClick={handleCardClick}
         />
         <Footer />
-      </div>
+      
 
       <PopupWithForm
         title="Редактировать профиль"
@@ -191,6 +191,7 @@ function App() {
         onCloseEsc={closePopupWithEsc}
         onCloseOverlay={closePopupWithClickOnOwerlay}
       />
+      </div>
     </>
   );
 }
