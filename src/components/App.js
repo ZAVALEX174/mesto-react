@@ -49,7 +49,7 @@ function App() {
   }
 
   return (
-    <div className="root">
+    <>
       <div className="page">
         <Header />
         <Main
@@ -191,7 +191,7 @@ function App() {
         onCloseEsc={closePopupWithEsc}
         onCloseOverlay={closePopupWithClickOnOwerlay}
       />
-    </div>
+    </>
   );
 }
 

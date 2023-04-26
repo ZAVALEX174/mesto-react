@@ -7,11 +7,8 @@ function PopupWithForm({
   onCloseEsc,
   onCloseOverlay,
   onSubmit,
-  isLoading,
   name,
   title,
-  submitButton,
-  submitBtnLoading,
   children,
 }) {
   useEffect(() => {
@@ -36,9 +33,6 @@ function PopupWithForm({
         <h2 className="popup__text">{title}</h2>
         <form name={"form"} className="popup__form" onSubmit={onSubmit}>
           {children}
-          <button className={`popup__button`} type="submit">
-            {isLoading ? submitBtnLoading : submitButton}
-          </button>
         </form>
         <button
           onClick={onClose}
