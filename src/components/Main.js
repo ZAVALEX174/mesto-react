@@ -67,8 +67,6 @@ function Main({
               <Card
                 card={card}
                 key={card._id}
-                name={card.name}
-                link={card.link}
                 onCardClick={onCardClick}
                 onConfirmCardDelete={onConfirmCardDelete}
               />

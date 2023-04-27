@@ -10,29 +10,32 @@ function PopupWithForm({
   name,
   title,
   children,
+  buttonText,
 }) {
   useEffect(() => {
-    if (isOpen) {
-      document.addEventListener("keydown", onCloseEsc);
-    } else {
-      document.removeEventListener("keydown", onCloseEsc);
+    function handleEscClose(evt) {
+      if (isOpen) {
+        onCloseEsc(evt);
+      }
     }
-  }, [isOpen]);
-
-  useEffect(() => {
-    if (isOpen) {
-      document.addEventListener("mousedown", onCloseOverlay);
-    } else {
-      document.removeEventListener("mousedown", onCloseOverlay);
-    }
+    document.addEventListener("keydown", handleEscClose);
+    return () => {
+      document.removeEventListener("keydown", handleEscClose);
+    };
   }, [isOpen]);
 
   return (
-    <section className={`popup ${name} ${isOpen && `popup_opened`}`}>
+    <section
+      className={`popup ${name} ${isOpen && `popup_opened`}`}
+      onClick={onCloseOverlay}
+    >
       <div className="popup__container">
         <h2 className="popup__text">{title}</h2>
         <form name={"form"} className="popup__form" onSubmit={onSubmit}>
           {children}
+          <button type="submit" className="popup__button popup__save">
+            {buttonText}
+          </button>
         </form>
         <button
           onClick={onClose}

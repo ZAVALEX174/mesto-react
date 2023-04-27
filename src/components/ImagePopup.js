@@ -1,33 +1,29 @@
 import React from "react";
 import { useEffect } from "react";
 
-function ImagePopup({ card, onClose }) {
+function ImagePopup({ card, onClose, onCloseEsc, onCloseOverlay }) {
   useEffect(() => {
-    if (card) {
-      function handleEscClose(event) {
-        if (event.key === "Escape") {
-          onClose();
-        }
+    function handleEscClose(evt) {
+      if (card) {
+        onCloseEsc(evt);
       }
-      document.addEventListener("keydown", handleEscClose);
-      return () => {
-        document.removeEventListener("keydown", handleEscClose);
-      };
     }
+    document.addEventListener("keydown", handleEscClose);
+    return () => {
+      document.removeEventListener("keydown", handleEscClose);
+    };
   }, [card]);
 
   useEffect(() => {
-    if (card) {
-      function handleOverlayClose(event) {
-        if (event.target.classList.contains("popup_opened")) {
-          onClose();
-        }
+    function handleOverlayClose(evt) {
+      if (card) {
+        onCloseOverlay(evt);
       }
-      document.addEventListener("mousedown", handleOverlayClose);
-      return () => {
-        document.removeEventListener("mousedown", handleOverlayClose);
-      };
     }
+    document.addEventListener("mousedown", handleOverlayClose);
+    return () => {
+      document.removeEventListener("mousedown", handleOverlayClose);
+    };
   }, [card]);
 
   return (

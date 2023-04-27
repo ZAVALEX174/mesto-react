@@ -3,7 +3,6 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Main from "./Main";
 import PopupWithForm from "./PopupWithForm";
-//import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 
 function App() {
@@ -26,10 +25,6 @@ function App() {
     setAddPlacePopupOpen(true);
   }
 
-  function handleCardClick(card) {
-    setSelectedCard(card);
-  }
-
   function closeAllPopups() {
     setEditAvatarPopupOpen(false);
     setEditProfilePopupOpen(false);
@@ -37,16 +32,12 @@ function App() {
     setSelectedCard(null);
   }
 
-  function closePopupWithClickOnOwerlay(evt) {
-    if (evt.target.classList.contains("popup_opened")) {
-      closeAllPopups();
-    }
+  function closePopupWithClickOnOwerlay() {
+    closeAllPopups();
   }
 
-  function closePopupWithEsc(evt) {
-    if (evt.key === "Escape") {
-      closeAllPopups();
-    }
+  function closePopupWithEsc() {
+    closeAllPopups();
   }
 
   return (
@@ -57,14 +48,15 @@ function App() {
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
           onEditAvatar={handleEditAvatarClick}
-          onCardClick={handleCardClick}
+          onCardClick={setSelectedCard}
         />
         <Footer />
 
         <PopupWithForm
           title="Редактировать профиль"
-          name="form"
+          name="profile"
           popup="profile-popup"
+          buttonText="Сохранить"
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onCloseEsc={closePopupWithEsc}
@@ -98,15 +90,16 @@ function App() {
             id="input-job-error"
             className="popup__error popup__error_visible"
           />
-          <button type="submit" className="popup__button popup__save">
+          {/* <button type="submit" className="popup__button popup__save">
             Сохранить
-          </button>
+          </button> */}
         </PopupWithForm>
 
         <PopupWithForm
           title="Новое место"
-          name="form"
+          name="image-card"
           popup="image"
+          buttonText="Создать"
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           onCloseEsc={closePopupWithEsc}
@@ -138,18 +131,19 @@ function App() {
             id="input-link-error"
             className="popup__error popup__error_visible"
           />
-          <button
+          {/* <button
             type="submit"
             className="popup__button popup__save popup__save_image"
           >
             Создать
-          </button>
+          </button> */}
         </PopupWithForm>
 
         <PopupWithForm
           title="Обновить аватар"
           name="edit-form-avatar"
           popup="popup_avatar-form"
+          buttonText="Сохранить"
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
           onCloseEsc={closePopupWithEsc}
@@ -168,9 +162,9 @@ function App() {
             className="popup__error popup__error_visible"
             id="link-avatar-error"
           />
-          <button className="popup__button popup__save" type="submit">
+          {/* <button className="popup__button popup__save" type="submit">
             Сохранить
-          </button>
+          </button> */}
         </PopupWithForm>
 
         {/* удалить карточку */}
@@ -178,15 +172,16 @@ function App() {
           title="Вы уверены?"
           name=""
           popup="confirm"
+          buttonText="Да"
           onClose={closeAllPopups}
         >
-          <button
+          {/* <button
             className="popup__button popup__save"
             type="submit"
             value="Да"
           >
             Да
-          </button>
+          </button> */}
         </PopupWithForm>
 
         <ImagePopup
