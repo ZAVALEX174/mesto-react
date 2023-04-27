@@ -1,3 +1,15 @@
+# Проект: mesto-react
+
+## Описание проекта:
+
+Этот проект описвает достопримечательности тех мест, где вы побывали.
+
+Проект написан при помощи библиотеки _React_.
+
+\*Была реализованя возможность закрытия окна _POPUP_ нажатием на темную облать, вокруг окна _POPUP_ и по нажатию на кнопку _ESC_.
+
+### [Ссылка на проект на GitHub]()
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
