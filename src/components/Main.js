@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import pen from "../images/pen.svg";
-import api from "../utils/Api";
+import api from "../utils/api";
 import Card from "./Card";
 
 function Main({
