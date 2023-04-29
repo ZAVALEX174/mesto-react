@@ -4,6 +4,7 @@ import Footer from "./Footer";
 import Main from "./Main";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] =
@@ -11,6 +12,8 @@ function App() {
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(null);
+
+  const [currentUser, setCurrentUser] = React.useState({})
 
   function handleEditAvatarClick() {
     // document.querySelector(".popup_avatar-form").classList.add("popup_opened");
@@ -32,14 +35,17 @@ function App() {
     setSelectedCard(null);
   }
 
-  function closePopupWithClickOnOwerlay() {
-    closeAllPopups();
+  function closePopupWithEsc(event) {
+    if (event.key === 'Escape') {
+      closeAllPopups();
+    }
   }
 
-  function closePopupWithEsc() {
-    closeAllPopups();
-  }
-
+  function closePopupWithClickOnOwerlay(event) {
+    if (event.target.classList.contains('popup_opened')) {
+     closeAllPopups();
+   }
+ }
   return (
     <>
       <div className="page">
