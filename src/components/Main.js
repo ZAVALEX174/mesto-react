@@ -11,6 +11,7 @@ function Main({
   onEditAvatar,
   onCardClick,
   onConfirmCardDelete,
+  onCardLike,
 }) {
   //const [userName, setUserName] = React.useState();
   //const [userDescription, setUserDescription] = React.useState();
@@ -72,6 +73,8 @@ function Main({
                 key={card._id}
                 onCardClick={onCardClick}
                 onConfirmCardDelete={onConfirmCardDelete}
+                onCardLike={onCardLike}
+                likes = {card.likes.length}
               />
             ))}
           </ul>
