@@ -4,9 +4,9 @@ import Footer from "./Footer";
 import Main from "./Main";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
-import api from "../../src/utils/Api";
+import api from "../utils/Api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import { useState, useEffect } from "react";
+import {useEffect } from "react";
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] =
@@ -47,13 +47,28 @@ function App() {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
-    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-      setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
-    }).catch((err) => {
-      console.error(err);
-    });
+    api
+      .likeCard(card._id, !isLiked)
+      .then((newCard) => {
+        setCards((state) =>
+          state.map((c) => c._id === card._id ? newCard : c)
+        );
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+
+      api
+      .removeLikeCard(card._id, !isLiked)
+      .then((newCard) => {
+        setCards((state) =>
+          state.map((c) => (c._id === card._id ? newCard : c))
+        );
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
-  
 
   function closeAllPopups() {
     setEditAvatarPopupOpen(false);
