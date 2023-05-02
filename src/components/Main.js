@@ -1,7 +1,7 @@
 import React from "react";
-import { useEffect } from "react";
+//import { useEffect } from "react";
 import pen from "../images/pen.svg";
-import api from "../utils/Api";
+//import api from "../utils/Api";
 import Card from "./Card";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
@@ -12,34 +12,35 @@ function Main({
   onCardClick,
   onConfirmCardDelete,
   onCardLike,
+  cards,
 }) {
   //const [userName, setUserName] = React.useState();
   //const [userDescription, setUserDescription] = React.useState();
   //const [userAvatar, setUserAvatar] = React.useState();
-  const [cards, setCards] = React.useState([]);
+  //const [cards, setCards] = React.useState([]);
 
   const currentUser = React.useContext(CurrentUserContext);
 
-  useEffect(() => {
-    // api
-    //   .getUserInfo()
-    //   .then((data) => {
-    //     setUserName(data.name);
-    //     setUserDescription(data.about);
-    //     setUserAvatar(data.avatar);
-    //   })
-    //   .catch((err) => {
-    //     console.log(`Ошибка сервера ${err}`);
-    //   });
-    api
-      .getInitialCards()
-      .then((data) => {
-        setCards(data);
-      })
-      .catch((err) => {
-        console.log(`Ошибка сервера ${err}`);
-      });
-  }, []);
+  // useEffect(() => {
+  //   // api
+  //   //   .getUserInfo()
+  //   //   .then((data) => {
+  //   //     setUserName(data.name);
+  //   //     setUserDescription(data.about);
+  //   //     setUserAvatar(data.avatar);
+  //   //   })
+  //   //   .catch((err) => {
+  //   //     console.log(`Ошибка сервера ${err}`);
+  //   //   });
+  //   api
+  //     .getInitialCards()
+  //     .then((data) => {
+  //       setCards(data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(`Ошибка сервера ${err}`);
+  //     });
+  // }, []);
 
   return (
     <>
@@ -74,7 +75,7 @@ function Main({
                 onCardClick={onCardClick}
                 onConfirmCardDelete={onConfirmCardDelete}
                 onCardLike={onCardLike}
-                likes = {card.likes.length}
+                likes={card.likes.length}
               />
             ))}
           </ul>

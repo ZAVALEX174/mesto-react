@@ -6,7 +6,7 @@ import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import api from "../utils/Api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import {useEffect } from "react";
+import { useEffect } from "react";
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] =
@@ -42,32 +42,56 @@ function App() {
     setAddPlacePopupOpen(true);
   }
 
+  useEffect(() => {
+    // api
+    //   .getUserInfo()
+    //   .then((data) => {
+    //     setUserName(data.name);
+    //     setUserDescription(data.about);
+    //     setUserAvatar(data.avatar);
+    //   })
+    //   .catch((err) => {
+    //     console.log(`Ошибка сервера ${err}`);
+    //   });
+    api
+      .getInitialCards()
+      .then((data) => {
+        setCards(data);
+      })
+      .catch((err) => {
+        console.log(`Ошибка сервера ${err}`);
+      });
+  }, []);
+
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
-    api
-      .likeCard(card._id, !isLiked)
-      .then((newCard) => {
-        setCards((state) =>
-          state.map((c) => c._id === card._id ? newCard : c)
-        );
-      })
-      .catch((err) => {
-        console.error(err);
-      });
 
+    if (!isLiked) {
       api
-      .removeLikeCard(card._id, !isLiked)
-      .then((newCard) => {
-        setCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard : c))
-        );
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+        .likeCard(card._id)
+        .then((newCard) => {
+          setCards((state) =>
+            state.map((c) => (c._id === card._id ? newCard : c))
+          );
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    } else {
+      api
+        .removeLikeCard(card._id)
+        .then((newCard) => {
+          setCards((state) =>
+            state.map((c) => (c._id === card._id ? newCard : c))
+          );
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
   }
 
   function closeAllPopups() {
