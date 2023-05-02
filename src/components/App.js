@@ -93,6 +93,19 @@ function App() {
         });
     }
   }
+  //------------------------------------------
+  //здесь функция удаления карточки:
+  function handleCardDelete(card) {
+    api
+      .removeCard(card._id)
+      .then(() => {
+        setCards((items) => items.filter((c) => c._id !== card._id && c));
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+  //------------------------------------------
 
   function closeAllPopups() {
     setEditAvatarPopupOpen(false);
@@ -124,6 +137,7 @@ function App() {
             onCardClick={setSelectedCard}
             onCardLike={handleCardLike}
             cards={cards}
+            onCardDelete={handleCardDelete}
           />
           <Footer />
 

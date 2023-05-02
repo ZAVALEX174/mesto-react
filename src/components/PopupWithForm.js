@@ -11,7 +11,6 @@ function PopupWithForm({
   title,
   children,
   buttonText,
-  
 }) {
   useEffect(() => {
     function handleEscClose(evt) {

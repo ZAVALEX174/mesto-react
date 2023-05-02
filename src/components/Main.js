@@ -10,7 +10,7 @@ function Main({
   onAddPlace,
   onEditAvatar,
   onCardClick,
-  onConfirmCardDelete,
+  onCardDelete,
   onCardLike,
   cards,
 }) {
@@ -73,7 +73,7 @@ function Main({
                 card={card}
                 key={card._id}
                 onCardClick={onCardClick}
-                onConfirmCardDelete={onConfirmCardDelete}
+                onCardDelete={onCardDelete}
                 onCardLike={onCardLike}
                 likes={card.likes.length}
               />
