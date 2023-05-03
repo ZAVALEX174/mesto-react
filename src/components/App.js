@@ -8,6 +8,7 @@ import api from "../utils/Api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { useEffect } from "react";
 import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] =
@@ -36,6 +37,18 @@ function App() {
     // document.querySelector(".popup_avatar-form").classList.add("popup_opened");
     setEditAvatarPopupOpen(true);
   }
+
+  function handleUpdateAvatar(data) {
+    setLoading(true);
+    api.setAvatar(data).then((newAvatar) => {
+      setCurrentUser(newAvatar);
+      closeAllPopups();
+    }).catch((err) => {
+      console.error(err);
+    }).finally(() => {setLoading(false)});
+  }
+
+
   function handleEditProfileClick() {
     // document.querySelector(".profile-popup").classList.add("popup_opened");
     setEditProfilePopupOpen(true);
@@ -214,7 +227,16 @@ function App() {
           </button> */}
           </PopupWithForm>
 
-          <PopupWithForm
+          <EditAvatarPopup
+            isOpen={isEditAvatarPopupOpen}
+            onClose={closeAllPopups}
+            onCloseEsc={closePopupWithEsc}
+            onCloseOverlay={closePopupWithClickOnOwerlay}
+            onUpdateAvatar={handleUpdateAvatar}
+            isLoading={isLoading}
+          />
+
+          {/* <PopupWithForm
             title="Обновить аватар"
             name="edit-form-avatar"
             popup="popup_avatar-form"
@@ -240,7 +262,7 @@ function App() {
             {/* <button className="popup__button popup__save" type="submit">
             Сохранить
           </button> */}
-          </PopupWithForm>
+          {/* </PopupWithForm>  */}
 
           {/* удалить карточку */}
           <PopupWithForm
