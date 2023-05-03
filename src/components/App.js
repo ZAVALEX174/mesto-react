@@ -9,6 +9,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { useEffect } from "react";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
+import AddPlacePopup from "./AddPlacePopup";
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] =
@@ -40,14 +41,19 @@ function App() {
 
   function handleUpdateAvatar(data) {
     setLoading(true);
-    api.setAvatar(data).then((newAvatar) => {
-      setCurrentUser(newAvatar);
-      closeAllPopups();
-    }).catch((err) => {
-      console.error(err);
-    }).finally(() => {setLoading(false)});
+    api
+      .setAvatar(data)
+      .then((newAvatar) => {
+        setCurrentUser(newAvatar);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }
-
 
   function handleEditProfileClick() {
     // document.querySelector(".profile-popup").classList.add("popup_opened");
@@ -73,6 +79,22 @@ function App() {
   function handleAddPlaceClick() {
     // document.querySelector(".popup_image").classList.add("popup_opened");
     setAddPlacePopupOpen(true);
+  }
+
+  function handleAddPlaceSubmit(data) {
+    setLoading(true);
+    api
+      .addCard(data)
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }
 
   useEffect(() => {
@@ -183,49 +205,14 @@ function App() {
             isLoading={isLoading}
           />
 
-          <PopupWithForm
-            title="Новое место"
-            name="image-card"
-            popup="image"
-            buttonText="Создать"
+          <AddPlacePopup
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
             onCloseEsc={closePopupWithEsc}
             onCloseOverlay={closePopupWithClickOnOwerlay}
-          >
-            <input
-              id="input-title"
-              type="text"
-              placeholder="Название"
-              name="name"
-              className="popup__input popup__input_text_image-name"
-              required=""
-              minLength={2}
-              maxLength={30}
-            />
-            <span
-              id="input-title-error"
-              className="popup__error popup__error_visible"
-            />
-            <input
-              id="input-link"
-              type="url"
-              placeholder="Ссылка на картинку"
-              name="link"
-              className="popup__input popup__input_text_image-link"
-              required=""
-            />
-            <span
-              id="input-link-error"
-              className="popup__error popup__error_visible"
-            />
-            {/* <button
-            type="submit"
-            className="popup__button popup__save popup__save_image"
-          >
-            Создать
-          </button> */}
-          </PopupWithForm>
+            onAddPlace={handleAddPlaceSubmit}
+            isLoading={isLoading}
+          />
 
           <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
@@ -236,35 +223,6 @@ function App() {
             isLoading={isLoading}
           />
 
-          {/* <PopupWithForm
-            title="Обновить аватар"
-            name="edit-form-avatar"
-            popup="popup_avatar-form"
-            buttonText="Сохранить"
-            isOpen={isEditAvatarPopupOpen}
-            onClose={closeAllPopups}
-            onCloseEsc={closePopupWithEsc}
-            onCloseOverlay={closePopupWithClickOnOwerlay}
-          >
-            <input
-              className="popup__input popup__info popup__info_avatar"
-              id="link-avatar"
-              name="avatar"
-              placeholder="Ссылка на картинку"
-              required=""
-              type="url"
-              defaultValue=""
-            />
-            <span
-              className="popup__error popup__error_visible"
-              id="link-avatar-error"
-            />
-            {/* <button className="popup__button popup__save" type="submit">
-            Сохранить
-          </button> */}
-          {/* </PopupWithForm>  */}
-
-          {/* удалить карточку */}
           <PopupWithForm
             title="Вы уверены?"
             name=""
