@@ -59,7 +59,7 @@ function EditProfilePopup({
             placeholder="Имя"
             name="name"
             className="popup__input popup__input_text_user"
-            required=""
+            required={true}
             minLength={2}
             maxLength={40}
             onChange={handleNameChange}
@@ -75,7 +75,7 @@ function EditProfilePopup({
             placeholder="О себе"
             name="about"
             className="popup__input popup__input_text_job"
-            required=""
+            required={true}
             minLength={2}
             maxLength={200}
             value={description}

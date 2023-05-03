@@ -43,7 +43,7 @@ function EditAvatarPopup({
             id="link-avatar"
             name="avatar"
             placeholder="Ссылка на картинку"
-            required=""
+            required={true}
             type="url"
             defaultValue=""
             ref={ref}

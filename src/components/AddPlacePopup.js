@@ -73,7 +73,7 @@ function AddPlacePopup({
             placeholder="Ссылка на картинку"
             name="link"
             className="popup__input popup__input_text_image-link"
-            required=""
+            required={true}
             value={link}
             onChange={handleLinkChange}
           />

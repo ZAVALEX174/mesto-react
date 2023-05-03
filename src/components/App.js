@@ -34,6 +34,17 @@ function App() {
       });
   }, []);
 
+
+  // useEffect(() => {
+  //   Promise.all([api.getUserInfo(), api.getInitialCards()]).then(([data, card]) => {
+  //     setCurrentUser(data);
+  //     setCards(card);
+  //   }).catch((err) => {
+  //     console.error(err);
+  //   })
+  // }, [])
+
+
   function handleEditAvatarClick() {
     // document.querySelector(".popup_avatar-form").classList.add("popup_opened");
     setEditAvatarPopupOpen(true);
