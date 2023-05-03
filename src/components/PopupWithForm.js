@@ -18,9 +18,9 @@ function PopupWithForm({
     if (!isOpen) return; // если попап закрыт — выходим из функции
 
     // если попап открыт — объявляем функцию закрытия и устанавливаем слушатель
-    function handleEscClose(evt) {
-      if (evt.key === "Escape") {
-        onCloseEsc();
+    function handleEscClose(e) {
+      if (e.key === "Escape") {
+        onClose();
       }
     }
     document.addEventListener("keydown", handleEscClose);

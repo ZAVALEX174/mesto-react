@@ -5,7 +5,7 @@ function ImagePopup({ card, onClose, onCloseEsc, onCloseOverlay }) {
   useEffect(() => {
     function handleEscClose(evt) {
       if (card) {
-        onCloseEsc(evt);
+        onClose(evt);
       }
     }
     document.addEventListener("keydown", handleEscClose);
