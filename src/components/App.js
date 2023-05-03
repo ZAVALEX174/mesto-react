@@ -76,6 +76,7 @@ function App() {
       });
   }
 
+  // Добавление карточек:
   function handleAddPlaceClick() {
     // document.querySelector(".popup_image").classList.add("popup_opened");
     setAddPlacePopupOpen(true);
@@ -98,16 +99,7 @@ function App() {
   }
 
   useEffect(() => {
-    // api
-    //   .getUserInfo()
-    //   .then((data) => {
-    //     setUserName(data.name);
-    //     setUserDescription(data.about);
-    //     setUserAvatar(data.avatar);
-    //   })
-    //   .catch((err) => {
-    //     console.log(`Ошибка сервера ${err}`);
-    //   });
+   
     api
       .getInitialCards()
       .then((data) => {
@@ -118,6 +110,7 @@ function App() {
       });
   }, []);
 
+  // Добавление лайков:
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
@@ -148,8 +141,8 @@ function App() {
         });
     }
   }
-  //------------------------------------------
-  //здесь функция удаления карточки:
+
+  // Функция удаления карточки:
   function handleCardDelete(card) {
     api
       .removeCard(card._id)
@@ -160,8 +153,8 @@ function App() {
         console.error(err);
       });
   }
-  //------------------------------------------
 
+  // Закрытие всез popup:
   function closeAllPopups() {
     setEditAvatarPopupOpen(false);
     setEditProfilePopupOpen(false);
@@ -169,17 +162,20 @@ function App() {
     setSelectedCard(null);
   }
 
+  // Закрытие по кнопке Esc:
   function closePopupWithEsc(evt) {
     if (evt.key === "Escape") {
       closeAllPopups();
     }
   }
 
+  // Закрытие по owerLay:
   function closePopupWithClickOnOwerlay(evt) {
     if (evt.target.classList.contains("popup_opened")) {
       closeAllPopups();
     }
   }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <>
@@ -223,6 +219,7 @@ function App() {
             isLoading={isLoading}
           />
 
+          {/* Подтверждение удаления карточки: */}
           <PopupWithForm
             title="Вы уверены?"
             name=""

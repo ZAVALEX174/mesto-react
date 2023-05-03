@@ -11,6 +11,8 @@ function PopupWithForm({
   title,
   children,
   buttonText,
+  isLoading,
+  submitBtnLoading,
 }) {
   useEffect(() => {
     function handleEscClose(evt) {
@@ -34,7 +36,7 @@ function PopupWithForm({
         <form name={"form"} className="popup__form" onSubmit={onSubmit}>
           {children}
           <button type="submit" className="popup__button popup__save">
-            {buttonText}
+            {isLoading ? submitBtnLoading : buttonText}
           </button>
         </form>
         <button

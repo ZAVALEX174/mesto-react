@@ -28,7 +28,7 @@ function EditAvatarPopup({
       title="Обновить аватар"
       name="edit-form-avatar"
       popup="popup_avatar-form"
-      buttonText="Оюновить"
+      buttonText="Обновить"
       isOpen={isOpen}
       onClose={onClose}
       onCloseEsc={onCloseEsc}

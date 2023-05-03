@@ -81,12 +81,7 @@ function AddPlacePopup({
             id="input-link-error"
             className="popup__error popup__error_visible"
           />
-          {/* <button
-type="submit"
-className="popup__button popup__save popup__save_image"
->
-Создать
-</button> */}
+          
         </>
       }
     />

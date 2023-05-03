@@ -13,34 +13,9 @@ function Main({
   onCardDelete,
   onCardLike,
   cards,
-}) {
-  //const [userName, setUserName] = React.useState();
-  //const [userDescription, setUserDescription] = React.useState();
-  //const [userAvatar, setUserAvatar] = React.useState();
-  //const [cards, setCards] = React.useState([]);
+}) { 
 
   const currentUser = React.useContext(CurrentUserContext);
-
-  // useEffect(() => {
-  //   // api
-  //   //   .getUserInfo()
-  //   //   .then((data) => {
-  //   //     setUserName(data.name);
-  //   //     setUserDescription(data.about);
-  //   //     setUserAvatar(data.avatar);
-  //   //   })
-  //   //   .catch((err) => {
-  //   //     console.log(`Ошибка сервера ${err}`);
-  //   //   });
-  //   api
-  //     .getInitialCards()
-  //     .then((data) => {
-  //       setCards(data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(`Ошибка сервера ${err}`);
-  //     });
-  // }, []);
 
   return (
     <>
