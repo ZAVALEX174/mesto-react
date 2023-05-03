@@ -57,7 +57,7 @@ function AddPlacePopup({
             placeholder="Название"
             name="name"
             className="popup__input popup__input_text_image-name"
-            required=""
+            required={true}
             minLength={2}
             maxLength={30}
             value={title}
@@ -81,7 +81,6 @@ function AddPlacePopup({
             id="input-link-error"
             className="popup__error popup__error_visible"
           />
-          
         </>
       }
     />

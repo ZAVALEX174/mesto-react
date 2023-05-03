@@ -15,12 +15,16 @@ function PopupWithForm({
   submitBtnLoading,
 }) {
   useEffect(() => {
+    if (!isOpen) return; // если попап закрыт — выходим из функции
+
+    // если попап открыт — объявляем функцию закрытия и устанавливаем слушатель
     function handleEscClose(evt) {
-      if (isOpen) {
-        onCloseEsc(evt);
+      if (evt.key === "Escape") {
+        onCloseEsc();
       }
     }
     document.addEventListener("keydown", handleEscClose);
+    // при изменении isOpen предварительно удаляем слушатель
     return () => {
       document.removeEventListener("keydown", handleEscClose);
     };
