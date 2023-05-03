@@ -7,6 +7,7 @@ import ImagePopup from "./ImagePopup";
 import api from "../utils/Api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { useEffect } from "react";
+import EditProfilePopup from "./EditProfilePopup";
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] =
@@ -14,6 +15,8 @@ function App() {
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(null);
+
+  const [isLoading, setLoading] = React.useState(false);
 
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
@@ -37,6 +40,23 @@ function App() {
     // document.querySelector(".profile-popup").classList.add("popup_opened");
     setEditProfilePopupOpen(true);
   }
+
+  function handleUpdateUser(data) {
+    setLoading(true);
+    api
+      .setUserProfile(data)
+      .then((newUser) => {
+        setCurrentUser(newUser);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
+
   function handleAddPlaceClick() {
     // document.querySelector(".popup_image").classList.add("popup_opened");
     setAddPlacePopupOpen(true);
@@ -141,48 +161,14 @@ function App() {
           />
           <Footer />
 
-          <PopupWithForm
-            title="Редактировать профиль"
-            name="profile"
-            popup="profile-popup"
-            buttonText="Сохранить"
+          <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
             onClose={closeAllPopups}
             onCloseEsc={closePopupWithEsc}
             onCloseOverlay={closePopupWithClickOnOwerlay}
-          >
-            <input
-              id="input-name"
-              type="text"
-              placeholder="Имя"
-              name="name"
-              className="popup__input popup__input_text_user"
-              required=""
-              minLength={2}
-              maxLength={40}
-            />
-            <span
-              id="input-name-error"
-              className="popup__error popup__error_visible"
-            />
-            <input
-              id="input-job"
-              type="text"
-              placeholder="О себе"
-              name="about"
-              className="popup__input popup__input_text_job"
-              required=""
-              minLength={2}
-              maxLength={200}
-            />
-            <span
-              id="input-job-error"
-              className="popup__error popup__error_visible"
-            />
-            {/* <button type="submit" className="popup__button popup__save">
-            Сохранить
-          </button> */}
-          </PopupWithForm>
+            onUpdateUser={handleUpdateUser}
+            isLoading={isLoading}
+          />
 
           <PopupWithForm
             title="Новое место"
