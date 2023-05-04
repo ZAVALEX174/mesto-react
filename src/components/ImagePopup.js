@@ -1,14 +1,29 @@
 import React from "react";
 import { useEffect } from "react";
 
-function ImagePopup({ card, onClose, onCloseEsc, onCloseOverlay }) {
+function ImagePopup({ card, onClose, isOpen, onCloseOverlay }) {
+  // useEffect(() => {
+  //   function handleEscClose(evt) {
+  //     if (card) {
+  //       onClose(evt);
+  //     }
+  //   }
+  //   document.addEventListener("keydown", handleEscClose);
+  //   return () => {
+  //     document.removeEventListener("keydown", handleEscClose);
+  //   };
+  // }, [card]);
   useEffect(() => {
-    function handleEscClose(evt) {
-      if (card) {
-        onClose(evt);
+    if (!card) return; // если попап закрыт — выходим из функции
+
+    // если попап открыт — объявляем функцию закрытия и устанавливаем слушатель
+    function handleEscClose(e) {
+      if (e.key === "Escape") {
+        onClose();
       }
     }
     document.addEventListener("keydown", handleEscClose);
+    // при изменении isOpen предварительно удаляем слушатель
     return () => {
       document.removeEventListener("keydown", handleEscClose);
     };
